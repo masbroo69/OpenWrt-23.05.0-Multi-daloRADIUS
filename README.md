@@ -2,12 +2,14 @@
 ![Hotspot-Login](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/2b782498-335d-40ab-84dd-b0bde293a443)
 daloRADIUS is an advanced RADIUS web management application aimed at managing hotspots and general-purpose ISP deployments. It features user management, graphical reporting, accounting, a billing engine and integrates with GoogleMaps for geo-locating.
 
+
 ![Daloradius](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/ca111c49-953f-4b0a-98aa-c3e1e434a172)
 daloRADIUS is written in PHP and JavaScript and utilizes a database abstraction layer which means that it supports many database systems, among them the popular MySQL, PostgreSQL, Sqlite, MsSQL, and many others.
 
 <img width="904" alt="Voucher" src="https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/dfcbfc48-1c6b-4af1-b43d-93f1d96cb337">
 
 It is based on a FreeRADIUS deployment with a database server serving as the backend. Among other features it implements ACLs, GoogleMaps integration for locating hotspots/access points visually and many more features.
+
 
 ![LuCI](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/bdfa46e7-fed6-41f0-b5d8-fca1a79124d2)
 OpenWrt 3.05.0 RC2 for ZTE B860H and FiberHome HG680P with more packages ported, more devices supported, better performance, and special optimizations for users. Compared the official one, we allow to use hacks or non-upstreamable patches / modifications to achieve our purpose. Source from anywhere.
@@ -52,3 +54,35 @@ OpenWrt 3.05.0 RC2 for ZTE B860H and FiberHome HG680P with more packages ported,
     https://github.com/lirantal/daloradius
     https://github.com/derisamedia
     https://www.youtube.com/@reyre
+
+<h2 dir="auto"><a id="user-content-installation" class="anchor" aria-hidden="true" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Installation</h2>
+<ol dir="auto">
+<li>opkg install <code>freeradius3 freeradius3-common freeradius3-mod-attr-filter freeradius3-mod-exec freeradius3-mod-expiration freeradius3-mod-expr freeradius3-mod-files freeradius3-mod-logintime freeradius3-mod-mschap freeradius3-mod-pap freeradius3-mod-preprocess freeradius3-mod-radutmp freeradius3-mod-realm freeradius3-mod-sql freeradius3-mod-sql-mysql freeradius3-mod-sql-null freeradius3-mod-sqlcounter freeradius3-mod-unix freeradius3-utils</code></li>
+<li>opkg install <code>mariadb-server mariadb-server-extra mariadb-client mariadb-client-extra</code></li>
+
+<li><code>mysql_install_db --force</code></li>
+<li><code>mysql_secure_installation -u root</code></li>
+<li><code>mysql -u root -pradius -e "CREATE DATABASE radius CHARACTER SET utf8;"</code></li>
+<li><code>mysql -u root -pradius -e "GRANT ALL ON radius.* TO 'radius'@'127.0.0.1' IDENTIFIED BY 'radius' WITH GRANT OPTION;"</code></li>
+<li><code>mysql -u root radius -p < /www/daloradius/contrib/db/fr2-mysql-daloradius-and-freeradius.sql</code></li>
+<li><code>mysql -u root radius -p < /www/daloradius/contrib/db/mysql-daloradius.sql</code></li>
+
+<li><code>curl -L http://pear.php.net/go-pear.phar --output go-pear.phar</code></li>
+<li><code>ln -s /usr/bin/php-cli /usr/bin/php</code></li>
+<li><code>php go-pear.phar</code></li>
+<li><code>pear install DB</code></li>
+
+<li><code>ln -s /usr/share/daloradius-master /www/daloradius</code></li>
+<li><code>ln -s /usr/share/hotspotlogin /www/client</code></li>
+
+<li><code>cd /etc/freeradius3/sites-enabled</code></li>
+<li><code>ln -s ../sites-available/daloradius daloradius</code></li>
+<li><code>ln -s ../sites-available/inner-tunnel inner-tunnel</code></li>
+
+<li><code>cd /etc/freeradius3/mods-enabled/</code></li>
+<li><code>ln -s ../mods-available/sql</code></li>
+<li><code>ln -s ../mods-available/sqlcounter</code></li>
+
+<li><code>opkg install coova-chilli</code></li>
+<li><code>/etc/init.d/chilli start</code></li>
+</ol>
