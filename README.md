@@ -1,5 +1,7 @@
 # **OpenWrt Daloradius V2.0 Hotspot Voucher - Fw OpenWrt 23.05.0 RC2 Clash-Wall 14.07.23 by @reyre**
 ![Hotspot-Login](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/2b782498-335d-40ab-84dd-b0bde293a443)
+<img width="959" alt="Screenshot 2023-08-01 110116" src="https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/28e5524e-d61d-42aa-b6fe-e85f3b437d83">
+
 daloRADIUS is an advanced RADIUS web management application aimed at managing hotspots and general-purpose ISP deployments. It features user management, graphical reporting, accounting, a billing engine and integrates with GoogleMaps for geo-locating.
 
 
