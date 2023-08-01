@@ -1,6 +1,6 @@
 # **OpenWrt Daloradius V2.0 Hotspot Voucher - Fw OpenWrt 23.05.0 RC2 Clash-Wall 14.07.23 by @reyre**
 ![Hotspot-Login](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/2b782498-335d-40ab-84dd-b0bde293a443)
-<img width="959" alt="Screenshot 2023-08-01 110116" src="https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/28e5524e-d61d-42aa-b6fe-e85f3b437d83">
+![Hotspot-Login](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/28e5524e-d61d-42aa-b6fe-e85f3b437d83)
 
 daloRADIUS is an advanced RADIUS web management application aimed at managing hotspots and general-purpose ISP deployments. It features user management, graphical reporting, accounting, a billing engine and integrates with GoogleMaps for geo-locating.
 
@@ -8,7 +8,7 @@ daloRADIUS is an advanced RADIUS web management application aimed at managing ho
 ![Daloradius](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/ca111c49-953f-4b0a-98aa-c3e1e434a172)
 daloRADIUS is written in PHP and JavaScript and utilizes a database abstraction layer which means that it supports many database systems, among them the popular MySQL, PostgreSQL, Sqlite, MsSQL, and many others.
 
-<img width="904" alt="Voucher" src="https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/dfcbfc48-1c6b-4af1-b43d-93f1d96cb337">
+![Hotspot-Login](https://github.com/masbroo69/OpenWrt-Daloradius-V2.0/assets/28827754/dfcbfc48-1c6b-4af1-b43d-93f1d96cb337)
 
 It is based on a FreeRADIUS deployment with a database server serving as the backend. Among other features it implements ACLs, GoogleMaps integration for locating hotspots/access points visually and many more features.
 
