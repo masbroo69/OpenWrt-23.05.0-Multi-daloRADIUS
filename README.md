@@ -29,7 +29,6 @@ OpenWrt 3.05.0 RC2 for ZTE B860H and FiberHome HG680P with more packages ported,
     - Default WIFI password: none
 
 **This is a list of luci applications installed in this firmware:**
-    
     - Pass Wall 
     - OpenClash
     - ZeroTire
@@ -38,8 +37,7 @@ OpenWrt 3.05.0 RC2 for ZTE B860H and FiberHome HG680P with more packages ported,
     - File Manager
     - etc
 
-**Features Fix for Daloradius:**
-    
+**Features Fix for Daloradius:**  
     - Server Status and Information
     - Users and Hotspots Management Graphs
     - Batch Add Users Management (Random User, Pass and PIN)
@@ -49,64 +47,8 @@ OpenWrt 3.05.0 RC2 for ZTE B860H and FiberHome HG680P with more packages ported,
     - WISPr-Bandwidth-Max-Up (Upload not leaking)
     - Login by role (Voucher, Member and Trial)
     - Responsive Web-UI for phone or tablet
-    
 
 **Credits:**
-
     https://github.com/lirantal/daloradius
     https://github.com/derisamedia
     https://www.youtube.com/@reyre
-
-<h2 dir="auto"><a id="user-content-installation" class="anchor" aria-hidden="true" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Installation</h2>
-<ol dir="auto">
-<li>opkg install freeradius3 freeradius3-common freeradius3-mod-attr-filter freeradius3-mod-exec freeradius3-mod-expiration freeradius3-mod-expr freeradius3-mod-files freeradius3-mod-logintime freeradius3-mod-mschap freeradius3-mod-pap freeradius3-mod-preprocess freeradius3-mod-radutmp freeradius3-mod-realm freeradius3-mod-sql freeradius3-mod-sql-mysql freeradius3-mod-sql-null freeradius3-mod-sqlcounter freeradius3-mod-unix freeradius3-utils</li>
-<li>opkg install mariadb-server mariadb-server-extra mariadb-client mariadb-client-extra</li>
-<li><code>/etc/config/mysqld <code>option enabled '1'</code>
-mysql_install_db --force
-mysql_secure_installation -u root</code></li>
-
-<li><code># Change working directory
-cd /var/www/html/</code></li>
-
-<li># Download the daloRADIUS source code</li>
-<li><code>wget https://github.com/lirantal/daloradius/archive/refs/tags/1.3.tar.gz</code></li>
-<li># Extract daloRADIUS source code</li>
-<li><code>tar -xf 1.3.tar.gz</code></li>
-<li># Verify extracted directory</li>
-<li><code>ls</li></code></li>
-<li># Rename directory to `daloradius`</li>
-<li><code>mv daloradius-1.3 daloradius</code></li>
-<li># Verify changed directory name to daloradius</li>
-<li><code>ls</li></code></li>
-
-<li>
-# CREATE DATABASE</li>
-<li><code>mysql -u root -pradius -e "CREATE DATABASE radius CHARACTER SET utf8;"
-mysql -u root -pradius -e "GRANT ALL ON radius.* TO 'radius'@'127.0.0.1' IDENTIFIED BY 'radius' WITH GRANT OPTION;"
-ln -s /usr/share/daloradius-master /www/daloradius
-ln -s /usr/share/hotspotlogin /www/client
-mysql -u root radius -p < /www/daloradius/contrib/db/fr2-mysql-daloradius-and-freeradius.sql
-mysql -u root radius -p < /www/daloradius/contrib/db/mysql-daloradius.sql
-</code></li>
-<li><code>curl -L http://pear.php.net/go-pear.phar --output go-pear.phar
-ln -s /usr/bin/php-cli /usr/bin/php</code></li>
-
-<li><code>opkg remove libgd --force-depends
-opkg install php8-cli php8-mod-gd php8-mod-simplexml php8-mod-xml</code></li>
-
-<li><code>php go-pear.phar
-opkg install php8-mod-mysqli
-pear install DB</code></li>
-
-<li><code>opkg install coova-chilli
-chmod a+x /etc/init.d/chilli
-/etc/init.d/chilli start</code></li>
-
-<li><code>cd /etc/freeradius3/sites-enabled
-ln -s ../sites-available/daloradius daloradius
-ln -s ../sites-available/inner-tunnel inner-tunnel
-
-cd /etc/freeradius3/mods-enabled/
-ln -s ../mods-available/sql
-ln -s ../mods-available/sqlcounter</code></li>
-</ol>
